@@ -1,26 +1,18 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
-import authReducer from '../modules/authentication.js';
+import { createStore, applyMiddleware, compose } from 'redux';
+import rootReducer from './reducer';
 import thunk from 'redux-thunk';
-import { LocalStorageUtils } from '../utils';
-import { setAuthToken, refreshAuthToken } from '../modules/authentication';
-
-const { loadAuthToken } = LocalStorageUtils;
+import { reduxFirestore, getFirestore } from 'redux-firestore';
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
+import firebase from '../firebase';
 
 const store = createStore(
-    combineReducers({
-        form: formReducer,
-        auth: authReducer
-    }),
-    applyMiddleware(thunk)
-    
+    rootReducer,
+    compose(
+        applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+        reduxFirestore(firebase),
+        reactReduxFirebase(firebase),
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )   
 );
-
-const authToken = loadAuthToken();
-if (authToken) {
-    const token = authToken;
-    store.dispatch(setAuthToken(token));
-    store.dispatch(refreshAuthToken());
-}
 
 export default store;
