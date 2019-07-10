@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import SignUp from '../SignUp';
+import BaseView from '../BaseView';
 class App extends Component {
   render() {
     return (
       <div>
-        <h1>Hello Jelly App</h1>
-        <SignUp />
+        <BaseView />
       </div>
     );
   }
