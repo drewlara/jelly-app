@@ -4,7 +4,7 @@ import React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-import Typography from 'components/Typography';
+import { Typography } from 'components';
 import AppFooter from 'views/AppFooter';
 import AppAppBar from 'views/AppAppBar';
 import AppForm from 'views/AppForm';
@@ -12,6 +12,7 @@ import { email, required } from 'form/validation';
 import RFTextField from 'form/RFTextField';
 import FormButton from 'form/FormButton';
 import FormFeedback from 'form/FormFeedback';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -57,7 +58,7 @@ function SignIn() {
           </Typography>
           <Typography variant="body2" align="center">
             {'Not a member yet? '}
-            <Link href="/premium-themes/onepirate/sign-up/" align="center" underline="always">
+            <Link component={RouterLink} to="/signup" align="center" underline="always">
               Sign Up here
             </Link>
           </Typography>
@@ -111,7 +112,7 @@ function SignIn() {
           )}
         </Form>
         <Typography align="center">
-          <Link underline="always" href="/premium-themes/onepirate/forgot-password/">
+          <Link underline="always" href="#">
             Forgot password?
           </Link>
         </Typography>

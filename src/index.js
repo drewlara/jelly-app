@@ -5,14 +5,13 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { ThemeProvider } from '@material-ui/styles';
 import JellyTheme from './styles';
-
-import Home from './routes/NonAuthenticated/Home/Home';
+import Routes from 'routes';
 
 ReactDOM.render(
   <ThemeProvider theme={JellyTheme}>
     <Provider store={store}>
       <Router>
-        <Home />
+        <Routes />
       </Router>
     </Provider>
   </ThemeProvider>,

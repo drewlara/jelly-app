@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from 'components/TextField';
+import { TextField } from 'components';
 
 function RFTextField(props) {
   const {

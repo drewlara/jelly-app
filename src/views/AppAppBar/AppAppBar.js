@@ -6,6 +6,7 @@ import Link from '@material-ui/core/Link';
 import AppBar from 'components/AppBar';
 import Toolbar from 'components/Toolbar';
 import { styles as toolbarStyles } from 'components/Toolbar/Toolbar'
+import { Link as RouterLink } from 'react-router-dom';
 
 const styles = theme => ({
   title: {
@@ -49,7 +50,8 @@ function AppAppBar(props) {
             underline="none"
             color="inherit"
             className={classes.title}
-            href="#"
+            component={RouterLink}
+            to="/"
           >
             {'jellyapp'}
           </Link>
@@ -59,7 +61,8 @@ function AppAppBar(props) {
               variant="h6"
               underline="none"
               className={classes.rightLink}
-              href="#"
+              component={RouterLink}
+            to="/signin"
             >
               {'Sign In'}
             </Link>
@@ -67,7 +70,8 @@ function AppAppBar(props) {
               variant="h6"
               underline="none"
               className={clsx(classes.rightLink, classes.linkSecondary)}
-              href="#"
+              component={RouterLink}
+              to="/signup"
             >
               {'Sign Up'}
             </Link>

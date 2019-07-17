@@ -46,8 +46,7 @@ const styles = theme => ({
     left: -67,
     right: 0,
     bottom: 0,
-    width: '100%',
-    background: 'url(/static/onepirate/productCTAImageDots.png)',
+    width: '100%'
   },
   image: {
     position: 'absolute',

@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { Field, Form, FormSpy } from 'react-final-form';
-import Typography from 'components/Typography';
+import { Typography } from 'components';
 import AppFooter from 'views/AppFooter';
 import AppAppBar from 'views/AppAppBar';
 import AppForm from 'views/AppForm';
@@ -13,6 +13,7 @@ import { email, required } from 'form/validation';
 import RFTextField from 'form/RFTextField';
 import FormButton from 'form/FormButton';
 import FormFeedback from 'form/FormFeedback';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -57,7 +58,7 @@ function SignUp() {
             Sign Up
           </Typography>
           <Typography variant="body2" align="center">
-            <Link href="/premium-themes/onepirate/sign-in/" underline="always">
+            <Link component={RouterLink} to="/signin" underline="always">
               Already have an account?
             </Link>
           </Typography>
