@@ -6,7 +6,6 @@ import Hidden from '@material-ui/core/Hidden';
 import Container from '@material-ui/core/Container';
 import {
   Typography,
-  TextField,
   Snackbar,
   Button
 } from 'components'
@@ -14,7 +13,7 @@ import {
 const styles = theme => ({
   root: {
     marginTop: theme.spacing(10),
-    marginBottom: 0,
+    marginBottom: theme.spacing(10),
     display: 'flex',
   },
   cardWrapper: {
@@ -36,6 +35,7 @@ const styles = theme => ({
   },
   button: {
     width: '100%',
+    marginTop: theme.spacing(5)
   },
   imagesWrapper: {
     position: 'relative',
@@ -88,19 +88,18 @@ class ProductCTA extends React.Component {
             <div className={classes.card}>
               <form onSubmit={this.handleSubmit} className={classes.cardContent}>
                 <Typography variant="h2" component="h2" gutterBottom>
-                  Receive offers
+                  Featured Item
                 </Typography>
                 <Typography variant="h5">
-                  Taste the holidays of the everyday close to home.
+                  Feature Item Description Content
                 </Typography>
-                <TextField noBorder className={classes.textField} placeholder="Your email" />
                 <Button
                   type="submit"
                   color="primary"
                   variant="contained"
                   className={classes.button}
                 >
-                  Keep me updated
+                  See more
                 </Button>
               </form>
             </div>
@@ -109,8 +108,8 @@ class ProductCTA extends React.Component {
             <Hidden smDown>
               <div className={classes.imageDots} />
               <img
-                src="https://images.unsplash.com/photo-1527853787696-f7be74f2e39a?auto=format&fit=crop&w=750&q=80"
-                alt="call to action"
+                src="https://images.unsplash.com/photo-1525604885849-bb72cf86832c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2900&q=80"
+                alt="featured item"
                 className={classes.image}
               />
             </Hidden>

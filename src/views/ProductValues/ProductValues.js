@@ -4,12 +4,19 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Typography from 'components/Typography';
+import productCurvyLines from 'assets/productCurvyLines.png';
+import {
+  HomeOutlined,
+  Star,
+  SendOutlined
+} from '@material-ui/icons';
 
 const styles = theme => ({
   root: {
     display: 'flex',
     overflow: 'hidden',
     backgroundColor: theme.palette.secondary.light,
+    height: '50vh'
   },
   container: {
     marginTop: theme.spacing(15),
@@ -23,12 +30,15 @@ const styles = theme => ({
     alignItems: 'center',
     padding: theme.spacing(0, 5),
   },
-  image: {
-    height: 55,
+  icon: {
+    height: '70px',
+    width: '70px',
+    zIndex: '1000'
   },
   title: {
     marginTop: theme.spacing(5),
     marginBottom: theme.spacing(5),
+    color: theme.palette.secondary.main
   },
   curvyLines: {
     pointerEvents: 'none',
@@ -44,56 +54,41 @@ function ProductValues(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <img
-          src="/static/themes/onepirate/productCurvyLines.png"
+          src={productCurvyLines}
           className={classes.curvyLines}
           alt="curvy lines"
         />
         <Grid container spacing={5}>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
-              <img
-                className={classes.image}
-                src="/static/themes/onepirate/productValues1.svg"
-                alt="suitcase"
-              />
+              <Star className={classes.icon} />
               <Typography variant="h6" className={classes.title}>
-                The best luxury hotels
+                Always Fresh Ingregients
               </Typography>
               <Typography variant="h5">
-                {'From the latest trendy boutique hotel to the iconic palace with XXL pool'}
-                {', go for a mini-vacation just a few subway stops away from your home.'}
+                {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
               </Typography>
             </div>
           </Grid>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
-              <img
-                className={classes.image}
-                src="/static/themes/onepirate/productValues2.svg"
-                alt="graph"
-              />
+              <HomeOutlined className={classes.icon} />
               <Typography variant="h6" className={classes.title}>
-                New experiences
+                Home Made
               </Typography>
               <Typography variant="h5">
-                {'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '}
-                {'your Sundays will not be alike.'}
+                {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
               </Typography>
             </div>
           </Grid>
           <Grid item xs={12} md={4}>
             <div className={classes.item}>
-              <img
-                className={classes.image}
-                src="/static/themes/onepirate/productValues3.svg"
-                alt="clock"
-              />
+              <SendOutlined className={classes.icon} />
               <Typography variant="h6" className={classes.title}>
-                Exclusive rates
+                Delivered Straight To You
               </Typography>
               <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+                {'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
               </Typography>
             </div>
           </Grid>

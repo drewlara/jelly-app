@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import JellyIcon from 'assets/jelly-icon.png';
+import { ArrowDropDownCircleOutlined } from '@material-ui/icons';
 
 const styles = theme => ({
   root: {
@@ -46,7 +48,12 @@ const styles = theme => ({
   arrowDown: {
     position: 'absolute',
     bottom: theme.spacing(4),
+    width: '50px',
+    height: "50px"
   },
+  imageHeader: {
+    marginBottom: theme.spacing(3)
+  }
 });
 
 function ProductHeroLayout(props) {
@@ -56,20 +63,17 @@ function ProductHeroLayout(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <img
-          src="/static/themes/onepirate/productHeroWonder.png"
-          alt="wonder"
-          width="147"
-          height="80"
+          src={JellyIcon}
+          alt="jelly-icon"
+          width="100"
+          height="100"
+          className={classes.imageHeader}
         />
         {children}
         <div className={classes.backdrop} />
         <div className={clsx(classes.background, backgroundClassName)} />
-        <img
+        <ArrowDropDownCircleOutlined
           className={classes.arrowDown}
-          src="/static/themes/onepirate/productHeroArrowDown.png"
-          height="16"
-          width="12"
-          alt="arrow down"
         />
       </Container>
     </section>

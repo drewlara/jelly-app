@@ -1,7 +1,6 @@
 import withRoot from 'hoc/withRoot';
 // --- Post bootstrap -----
 import React from 'react';
-import ProductCategories from 'views/ProductCategories';
 import ProductSmokingHero from 'views/ProductSmokingHero';
 import AppFooter from 'views/AppFooter';
 import ProductHero from 'views/ProductHero';
@@ -16,9 +15,8 @@ function Index() {
       <AppAppBar />
       <ProductHero />
       <ProductValues />
-      <ProductCategories />
-      <ProductHowItWorks />
       <ProductCTA />
+      <ProductHowItWorks />
       <ProductSmokingHero />
       <AppFooter />
     </React.Fragment>

@@ -49,9 +49,9 @@ function AppAppBar(props) {
             underline="none"
             color="inherit"
             className={classes.title}
-            href="/premium-themes/onepirate/"
+            href="#"
           >
-            {'onepirate'}
+            {'jellyapp'}
           </Link>
           <div className={classes.right}>
             <Link
@@ -59,7 +59,7 @@ function AppAppBar(props) {
               variant="h6"
               underline="none"
               className={classes.rightLink}
-              href="/premium-themes/onepirate/sign-in/"
+              href="#"
             >
               {'Sign In'}
             </Link>
@@ -67,7 +67,7 @@ function AppAppBar(props) {
               variant="h6"
               underline="none"
               className={clsx(classes.rightLink, classes.linkSecondary)}
-              href="/premium-themes/onepirate/sign-up/"
+              href="#"
             >
               {'Sign Up'}
             </Link>

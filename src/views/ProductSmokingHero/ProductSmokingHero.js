@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from 'components/Typography';
+import { InsertEmoticon } from '@material-ui/icons'
 
 const styles = theme => ({
   root: {
@@ -26,6 +27,10 @@ const styles = theme => ({
   buoy: {
     width: 60,
   },
+  icon: {
+    height: '70px',
+    width: '70px'
+  }
 });
 
 function ProductSmokingHero(props) {
@@ -41,7 +46,7 @@ function ProductSmokingHero(props) {
       <Typography variant="subtitle1" className={classes.link}>
         We are here to help. Get in touch!
       </Typography>
-      <img src="/static/themes/onepirate/producBuoy.svg" className={classes.buoy} alt="buoy" />
+      <InsertEmoticon className={classes.icon} />
     </Container>
   );
 }

@@ -5,6 +5,12 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from 'components/Button';
 import Typography from 'components/Typography';
+import productCurvyLines from 'assets/productCurvyLines.png'
+import {
+  AddShoppingCartOutlined,
+  PermIdentityOutlined,
+  Done
+} from '@material-ui/icons';
 
 const styles = theme => ({
   root: {
@@ -27,13 +33,15 @@ const styles = theme => ({
     padding: theme.spacing(0, 5),
   },
   title: {
-    marginBottom: theme.spacing(14),
+    marginBottom: theme.spacing(10),
   },
-  number: {
-    fontSize: 24,
+  subtitles: {
+    fontSize: 18,
     fontFamily: theme.typography.fontFamily,
     color: theme.palette.secondary.main,
     fontWeight: theme.typography.fontWeightMedium,
+    marginTop: theme.spacing(5),
+    marginBottom: theme.spacing(5)
   },
   image: {
     height: 55,
@@ -49,6 +57,10 @@ const styles = theme => ({
   button: {
     marginTop: theme.spacing(8),
   },
+  icon: {
+    height: '70px',
+    width: '70px'
+  }
 });
 
 function ProductHowItWorks(props) {
@@ -58,7 +70,7 @@ function ProductHowItWorks(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <img
-          src="/static/themes/onepirate/productCurvyLines.png"
+          src={productCurvyLines}
           className={classes.curvyLines}
           alt="curvy lines"
         />
@@ -69,41 +81,28 @@ function ProductHowItWorks(props) {
           <Grid container spacing={5}>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
-                <div className={classes.number}>1.</div>
-                <img
-                  src="/static/themes/onepirate/productHowItWorks1.svg"
-                  alt="suitcase"
-                  className={classes.image}
-                />
+                <AddShoppingCartOutlined className={classes.icon} />
+                <div className={classes.subtitles}>Start your order</div>
                 <Typography variant="h5" align="center">
-                  Appointment every Wednesday 9am.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
-                <div className={classes.number}>2.</div>
-                <img
-                  src="/static/themes/onepirate/productHowItWorks2.svg"
-                  alt="graph"
-                  className={classes.image}
-                />
+                <PermIdentityOutlined className={classes.icon} />
+                <div className={classes.subtitles}>Sign Up or Checkout as Guest</div>
                 <Typography variant="h5" align="center">
-                  First come, first served. Our offers are in limited quantities, so be quick.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </Typography>
               </div>
             </Grid>
             <Grid item xs={12} md={4}>
               <div className={classes.item}>
-                <div className={classes.number}>3.</div>
-                <img
-                  src="/static/themes/onepirate/productHowItWorks3.svg"
-                  alt="clock"
-                  className={classes.image}
-                />
+                <Done className={classes.icon} />
+                <div className={classes.subtitles}>Complete your order</div>
                 <Typography variant="h5" align="center">
-                  {'New offers every week. New experiences, new surprises. '}
-                  {'Your Sundays will no longer be alike.'}
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 </Typography>
               </div>
             </Grid>
