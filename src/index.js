@@ -6,13 +6,13 @@ import store from './store';
 import { ThemeProvider } from '@material-ui/styles';
 import JellyTheme from './styles';
 
-import App from './components/App';
+import Home from './routes/NonAuthenticated/Home/Home';
 
 ReactDOM.render(
   <ThemeProvider theme={JellyTheme}>
     <Provider store={store}>
       <Router>
-        <App />
+        <Home />
       </Router>
     </Provider>
   </ThemeProvider>,

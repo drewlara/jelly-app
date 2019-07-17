@@ -1,3 +1,3 @@
-import JellyTheme from './theme';
+import theme from './theme';
 
-export default JellyTheme;
+export default theme;

@@ -3,7 +3,7 @@ import Button from './Button';
 import Markdown from './Markdown';
 import Paper from './Paper';
 import Snackbar from './Snackbar';
-import Textfield from './Textfield';
+import TextField from './Textfield';
 import Toolbar from './Toolbar';
 import Typography from './Typography';
 
@@ -13,7 +13,7 @@ export {
   Markdown,
   Paper,
   Snackbar,
-  Textfield,
+  TextField,
   Toolbar,
   Typography
-}
+};
