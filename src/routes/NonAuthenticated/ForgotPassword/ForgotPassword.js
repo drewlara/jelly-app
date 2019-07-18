@@ -4,11 +4,7 @@ import React from 'react';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from 'components/Typography';
-import {
-  AppFooter,
-  AppAppBar,
-  AppForm
-} from 'views';
+import { AppForm } from 'views';
 import { email, required } from 'form/validation';
 import RFTextField from 'form/RFTextField';
 import FormButton from 'form/FormButton';
@@ -50,7 +46,6 @@ function ForgotPassword() {
 
   return (
     <React.Fragment>
-      <AppAppBar />
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
@@ -98,7 +93,6 @@ function ForgotPassword() {
           )}
         </Form>
       </AppForm>
-      <AppFooter />
     </React.Fragment>
   );
 }

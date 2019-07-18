@@ -5,8 +5,6 @@ import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import { Typography } from 'components';
-import AppFooter from 'views/AppFooter';
-import AppAppBar from 'views/AppAppBar';
 import AppForm from 'views/AppForm';
 import { email, required } from 'form/validation';
 import RFTextField from 'form/RFTextField';
@@ -27,9 +25,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function SignIn() {
+function SignIn(props) {
   const classes = useStyles();
-  const [sent, setSent] = React.useState(false);
+  const { authActions, authState, fireBasestate } = props;
+  const { isLoading } = authState;
 
   const validate = values => {
     const errors = required(['email', 'password'], values);
@@ -44,13 +43,13 @@ function SignIn() {
     return errors;
   };
 
-  const handleSubmit = () => {
-    setSent(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(e)
   };
 
   return (
     <React.Fragment>
-      <AppAppBar />
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
@@ -64,52 +63,48 @@ function SignIn() {
           </Typography>
         </React.Fragment>
         <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
-              <Field
-                autoComplete="email"
-                autoFocus
-                component={RFTextField}
-                disabled={submitting || sent}
-                fullWidth
-                label="Email"
-                margin="normal"
-                name="email"
-                required
-                size="large"
-              />
-              <Field
-                fullWidth
-                size="large"
-                component={RFTextField}
-                disabled={submitting || sent}
-                required
-                name="password"
-                autoComplete="current-password"
-                label="Password"
-                type="password"
-                margin="normal"
-              />
-              <FormSpy subscription={{ submitError: true }}>
-                {({ submitError }) =>
-                  submitError ? (
-                    <FormFeedback className={classes.feedback} error>
-                      {submitError}
-                    </FormFeedback>
-                  ) : null
-                }
-              </FormSpy>
-              <FormButton
-                className={classes.button}
-                disabled={submitting || sent}
-                size="large"
-                color="secondary"
-                fullWidth
-              >
-                {submitting || sent ? 'In progress…' : 'Sign In'}
-              </FormButton>
-            </form>
-          )}
+          <Field
+            autoComplete="email"
+            autoFocus
+            component={RFTextField}
+            disabled={isLoading}
+            fullWidth
+            label="Email"
+            margin="normal"
+            name="email"
+            required
+            size="large"
+          />
+          <Field
+            fullWidth
+            size="large"
+            component={RFTextField}
+            disabled={isLoading}
+            required
+            name="password"
+            autoComplete="current-password"
+            label="Password"
+            type="password"
+            margin="normal"
+          />
+          <FormSpy subscription={{ submitError: true }}>
+            {({ submitError }) =>
+              submitError ? (
+                <FormFeedback className={classes.feedback} error>
+                  {submitError}
+                </FormFeedback>
+              ) : null
+            }
+          </FormSpy>
+          <FormButton
+            className={classes.button}
+            disabled={isLoading}
+            size="large"
+            color="secondary"
+            fullWidth
+          >
+            {isLoading ? 'In progress…' : 'Sign In'}
+          </FormButton>
         </Form>
         <Typography align="center">
           <Link underline="always" href="#">
@@ -117,7 +112,6 @@ function SignIn() {
           </Link>
         </Typography>
       </AppForm>
-      <AppFooter />
     </React.Fragment>
   );
 }

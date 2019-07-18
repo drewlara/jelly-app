@@ -6,8 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { Typography } from 'components';
-import AppFooter from 'views/AppFooter';
-import AppAppBar from 'views/AppAppBar';
 import AppForm from 'views/AppForm';
 import { email, required } from 'form/validation';
 import RFTextField from 'form/RFTextField';
@@ -51,7 +49,6 @@ function SignUp() {
 
   return (
     <React.Fragment>
-      <AppAppBar />
       <AppForm>
         <React.Fragment>
           <Typography variant="h3" gutterBottom marked="center" align="center">
@@ -131,7 +128,6 @@ function SignUp() {
           )}
         </Form>
       </AppForm>
-      <AppFooter />
     </React.Fragment>
   );
 }
