@@ -4,13 +4,12 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from 'components/Paper';
-import appCurvyLines from 'assets/appCurvyLines.png'
 
 const styles = theme => ({
   root: {
     display: 'flex',
-    backgroundImage: `url(${appCurvyLines})`,
     backgroundRepeat: 'no-repeat',
+    alignItems: 'center'
   },
   paper: {
     padding: theme.spacing(4, 3),

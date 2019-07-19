@@ -1,53 +1,40 @@
 import withRoot from 'hoc/withRoot';
-// --- Post bootstrap -----
 import React from 'react';
-import { Field, Form, FormSpy } from 'react-final-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
-import { Typography } from 'components';
+import { Typography, Button } from 'components';
+import FormTextField from 'form/FormTextField';
 import AppForm from 'views/AppForm';
-import { email, required } from 'form/validation';
-import RFTextField from 'form/RFTextField';
-import FormButton from 'form/FormButton';
-import FormFeedback from 'form/FormFeedback';
 import { Link as RouterLink } from 'react-router-dom';
+import { Field, reduxForm, focus } from 'redux-form';
+import { required } from 'form/validators';
 
 const useStyles = makeStyles(theme => ({
   form: {
     marginTop: theme.spacing(6),
+    boxSizing: 'border-box'
   },
   button: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(2),
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.common.white
   },
   feedback: {
     marginTop: theme.spacing(2),
   },
 }));
 
-function SignIn(props) {
+const SignIn = (props) => {
   const classes = useStyles();
-  const { authActions, authState, fireBasestate } = props;
+  const { authActions, authState, firebaseState, handleSubmit } = props;
+  const { signIn } = authActions;
   const { isLoading } = authState;
 
-  const validate = values => {
-    const errors = required(['email', 'password'], values);
-
-    if (!errors.email) {
-      const emailError = email(values.email, values);
-      if (emailError) {
-        errors.email = email(values.email, values);
-      }
-    }
-
-    return errors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e)
-  };
-
+  const onSubmit = (values) => {
+    signIn(values);
+  }
+  console.log(isLoading);
   return (
     <React.Fragment>
       <AppForm>
@@ -62,50 +49,42 @@ function SignIn(props) {
             </Link>
           </Typography>
         </React.Fragment>
-        <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
+        <form onSubmit={handleSubmit(values => onSubmit(values))}>
           <Field
             autoComplete="email"
-            autoFocus
-            component={RFTextField}
+            component={FormTextField}
             disabled={isLoading}
             fullWidth
             label="Email"
             margin="normal"
             name="email"
-            required
-            size="large"
+            validate={[required]}
+            placeholder="Email"
           />
           <Field
             fullWidth
-            size="large"
-            component={RFTextField}
+            component={FormTextField}
             disabled={isLoading}
-            required
             name="password"
             autoComplete="current-password"
             label="Password"
             type="password"
             margin="normal"
+            validate={[required]}
+            placeholder="Password"
           />
-          <FormSpy subscription={{ submitError: true }}>
-            {({ submitError }) =>
-              submitError ? (
-                <FormFeedback className={classes.feedback} error>
-                  {submitError}
-                </FormFeedback>
-              ) : null
-            }
-          </FormSpy>
-          <FormButton
+          <Button
             className={classes.button}
-            disabled={isLoading}
-            size="large"
+            disabled={isLoading || props.invalid}
             color="secondary"
+            variant="contained"
+            size="large"
             fullWidth
+            type="submit"
           >
-            {isLoading ? 'In progress…' : 'Sign In'}
-          </FormButton>
-        </Form>
+            {isLoading ? 'Signing In…' : 'Sign In'}
+          </Button>
+        </form>
         <Typography align="center">
           <Link underline="always" href="#">
             Forgot password?
@@ -116,4 +95,9 @@ function SignIn(props) {
   );
 }
 
-export default withRoot(SignIn);
+const SignInComponent = withRoot(SignIn);
+
+export default reduxForm({
+  form: 'login',
+  onSubmitFail: (errors, dispatch) => dispatch(focus('username', 'password'))
+})(SignInComponent);

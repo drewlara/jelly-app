@@ -28,6 +28,7 @@ export const authError = error => ({
 });
 
 export const signIn = (credentials) => (dispatch, getState, { getFirebase }) => {
+  dispatch({ type: 'AUTH_REQUEST' })
   const firebase = getFirebase();
   firebase.auth().signInWithEmailAndPassword(
     credentials.email,
