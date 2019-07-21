@@ -8,6 +8,7 @@ import AppForm from 'views/AppForm';
 import { Link as RouterLink } from 'react-router-dom';
 import { Field, reduxForm, focus } from 'redux-form';
 import { required } from 'form/validators';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -24,12 +25,16 @@ const useStyles = makeStyles(theme => ({
 
 const SignIn = (props) => {
   const classes = useStyles();
-  const { authActions, authState, handleSubmit } = props;
+  const { authActions, authState, handleSubmit, firebaseState } = props;
   const { signIn } = authActions;
   const { isLoading } = authState;
 
   const onSubmit = (values) => {
-    signIn(values);
+    return signIn(values);
+  }
+
+  if (!!firebaseState.auth.uid) {
+    return <Redirect to="/profile" />
   }
 
   return (

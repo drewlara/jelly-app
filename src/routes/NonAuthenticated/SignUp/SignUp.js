@@ -29,7 +29,7 @@ const SignUp = (props) => {
   const { isLoading } = authState;
 
   const onSubmit = (values) => {
-    signUp(values);
+    return signUp(values);
   };
 
   return (

@@ -31,14 +31,19 @@ const styles = theme => ({
     fontSize: 16,
     color: theme.palette.common.white,
     marginLeft: theme.spacing(3),
+    cursor: 'pointer'
   },
   linkSecondary: {
     color: theme.palette.secondary.main,
   },
 });
 
-function AppAppBar(props) {
-  const { classes } = props;
+const AppAppBar = (props) => {
+  const { classes, firebaseState, authActions } = props;
+
+  const signOut = () => {
+    return authActions.signOut();
+  }
 
   return (
     <div>
@@ -56,25 +61,42 @@ function AppAppBar(props) {
             {'jellyapp'}
           </Link>
           <div className={classes.right}>
-            <Link
-              color="inherit"
-              variant="h6"
-              underline="none"
-              className={classes.rightLink}
-              component={RouterLink}
-            to="/signin"
-            >
-              {'Sign In'}
-            </Link>
-            <Link
-              variant="h6"
-              underline="none"
-              className={clsx(classes.rightLink, classes.linkSecondary)}
-              component={RouterLink}
-              to="/signup"
-            >
-              {'Sign Up'}
-            </Link>
+            {!firebaseState.auth.uid &&
+              <React.Fragment>
+                <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  component={RouterLink}
+                  to="/signin"
+                >
+                  {'Sign In'}
+                </Link>
+                <Link
+                  variant="h6"
+                  underline="none"
+                  className={clsx(classes.rightLink, classes.linkSecondary)}
+                  component={RouterLink}
+                  to="/signup"
+                >
+                  {'Sign Up'}
+                </Link>
+              </React.Fragment>
+            }
+            {!!firebaseState.auth.uid &&
+              <React.Fragment>
+                <Link
+                  color="inherit"
+                  variant="h6"
+                  underline="none"
+                  className={classes.rightLink}
+                  onClick={signOut}
+                >
+                  {'Sign Out'}
+                </Link>
+              </React.Fragment>
+            }
           </div>
         </Toolbar>
       </AppBar>

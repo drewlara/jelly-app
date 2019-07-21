@@ -1,3 +1,3 @@
-import AppAppBar from './AppAppBar';
+import AppAppBar from './container';
 
 export default AppAppBar;
