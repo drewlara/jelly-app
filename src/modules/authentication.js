@@ -54,12 +54,33 @@ export const signOut = () => (dispatch, getState, { getFirebase }) => {
   });
 };
 
+export const signUp = (newUser) => (dispatch, gesState, { getFirebase, getFirestore }) => {
+  dispatch({ type: 'AUTH_REQUEST' });
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+
+  firebase.auth().createUserWithEmailAndPassword(
+    newUser.email,
+    newUser.password
+  ).then((resp) => {
+    return firestore.collection('users').doc(resp.user.uid).set({
+      firstName: newUser.firstName,
+      lastName: newUser.lastName
+    })
+  }).then(() => {
+    dispatch({ type: 'AUTH_SUCCESS' });
+  }).catch((error) => {
+    dispatch({ type: 'AUTH_ERROR', error });
+  })
+}
+
 export const actions = {
   clearAuth,
   authSuccess,
   authError,
   signIn,
-  signOut
+  signOut,
+  signUp
 };
 
 /* Action Handlers */

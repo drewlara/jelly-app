@@ -1,17 +1,14 @@
 import withRoot from 'hoc/withRoot';
-// --- Post bootstrap -----
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
-import { Field, Form, FormSpy } from 'react-final-form';
-import { Typography } from 'components';
+import { Typography, Button } from 'components';
 import AppForm from 'views/AppForm';
-import { email, required } from 'form/validation';
-import RFTextField from 'form/RFTextField';
-import FormButton from 'form/FormButton';
-import FormFeedback from 'form/FormFeedback';
+import FormTextField from 'form/FormTextField';
 import { Link as RouterLink } from 'react-router-dom';
+import { Field, reduxForm, focus } from 'redux-form';
+import { required, isTrimmed, email, passwordComplexity, passwordsMatch} from 'form/validators';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -20,31 +17,19 @@ const useStyles = makeStyles(theme => ({
   button: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(2),
-  },
-  feedback: {
-    marginTop: theme.spacing(2),
-  },
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.common.white
+  }
 }));
 
-function SignUp() {
+const SignUp = (props) => {
   const classes = useStyles();
-  const [sent, setSent] = React.useState(false);
+  const { authActions, authState, handleSubmit } = props;
+  const { signUp } = authActions;
+  const { isLoading } = authState;
 
-  const validate = values => {
-    const errors = required(['firstName', 'lastName', 'email', 'password'], values);
-
-    if (!errors.email) {
-      const emailError = email(values.email, values);
-      if (emailError) {
-        errors.email = email(values.email, values);
-      }
-    }
-
-    return errors;
-  };
-
-  const handleSubmit = () => {
-    setSent(true);
+  const onSubmit = (values) => {
+    signUp(values);
   };
 
   return (
@@ -60,76 +45,79 @@ function SignUp() {
             </Link>
           </Typography>
         </React.Fragment>
-        <Form onSubmit={handleSubmit} subscription={{ submitting: true }} validate={validate}>
-          {({ handleSubmit2, submitting }) => (
-            <form onSubmit={handleSubmit2} className={classes.form} noValidate>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <Field
-                    autoFocus
-                    component={RFTextField}
-                    autoComplete="fname"
-                    fullWidth
-                    label="First name"
-                    name="firstName"
-                    required
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <Field
-                    component={RFTextField}
-                    autoComplete="lname"
-                    fullWidth
-                    label="Last name"
-                    name="lastName"
-                    required
-                  />
-                </Grid>
-              </Grid>
+        <form onSubmit={handleSubmit(values => onSubmit(values))} className={classes.form}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
               <Field
-                autoComplete="email"
-                component={RFTextField}
-                disabled={submitting || sent}
+                component={FormTextField}
+                autoComplete="fname"
                 fullWidth
-                label="Email"
-                margin="normal"
-                name="email"
-                required
+                placeholder="First name"
+                name="firstName"
+                validate={[required, isTrimmed]}
               />
+            </Grid>
+            <Grid item xs={12} sm={6}>
               <Field
+                component={FormTextField}
+                autoComplete="lname"
                 fullWidth
-                component={RFTextField}
-                disabled={submitting || sent}
-                required
-                name="password"
-                autoComplete="current-password"
-                label="Password"
-                type="password"
-                margin="normal"
+                placeholder="Last name"
+                name="lastName"
+                validate={[required, isTrimmed]}
               />
-              <FormSpy subscription={{ submitError: true }}>
-                {({ submitError }) =>
-                  submitError ? (
-                    <FormFeedback className={classes.feedback} error>
-                      {submitError}
-                    </FormFeedback>
-                  ) : null
-                }
-              </FormSpy>
-              <FormButton
-                className={classes.button}
-                disabled={submitting || sent}
-                color="secondary"
-                fullWidth
-              >
-                {submitting || sent ? 'In progress…' : 'Sign Up'}
-              </FormButton>
-            </form>
-          )}
-        </Form>
+            </Grid>
+          </Grid>
+          <Field
+            autoComplete="email"
+            component={FormTextField}
+            disabled={isLoading}
+            fullWidth
+            placeholder="Email"
+            margin="normal"
+            name="email"
+            validate={[required, email]}
+          />
+          <Field
+            fullWidth
+            component={FormTextField}
+            disabled={isLoading}
+            name="password"
+            autoComplete="current-password"
+            placeholder="Password"
+            type="password"
+            margin="normal"
+            validate={[required, passwordComplexity]}
+          />
+          <Field
+            fullWidth
+            component={FormTextField}
+            disabled={isLoading}
+            name="passwordConfirmation"
+            placeholder="Confirm Password"
+            type="password"
+            margin="normal"
+            validate={[required, passwordsMatch]}
+          />
+          <Button
+            className={classes.button}
+            disabled={isLoading || props.invalid}
+            color="secondary"
+            variant="contained"
+            fullWidth
+            type="submit"
+          >
+            {isLoading ? 'Creating Account…' : 'Sign Up'}
+          </Button>
+        </form>
       </AppForm>
     </React.Fragment>
   );
 }
 
-export default withRoot(SignUp);
+const SignUpComponent = withRoot(SignUp);
+
+export default reduxForm({
+  form: 'signup',
+  onSubmitFail: (errors, dispatch) => dispatch(focus('email', 'password'))
+})(SignUpComponent);

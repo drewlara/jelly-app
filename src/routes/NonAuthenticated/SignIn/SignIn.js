@@ -19,22 +19,19 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(2),
     backgroundColor: theme.palette.secondary.main,
     color: theme.palette.common.white
-  },
-  feedback: {
-    marginTop: theme.spacing(2),
-  },
+  }
 }));
 
 const SignIn = (props) => {
   const classes = useStyles();
-  const { authActions, authState, firebaseState, handleSubmit } = props;
+  const { authActions, authState, handleSubmit } = props;
   const { signIn } = authActions;
   const { isLoading } = authState;
 
   const onSubmit = (values) => {
     signIn(values);
   }
-  console.log(isLoading);
+
   return (
     <React.Fragment>
       <AppForm>
@@ -99,5 +96,5 @@ const SignInComponent = withRoot(SignIn);
 
 export default reduxForm({
   form: 'login',
-  onSubmitFail: (errors, dispatch) => dispatch(focus('username', 'password'))
+  onSubmitFail: (errors, dispatch) => dispatch(focus('email', 'password'))
 })(SignInComponent);
