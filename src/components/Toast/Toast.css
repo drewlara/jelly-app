@@ -1,0 +1,16 @@
+@import '~react-toastify/dist/ReactToastify.css';
+
+.Toastify__toast--success {
+  background: #4CAF50; 
+}
+
+.Toastify__toast--warning {
+  background: #ffc071; 
+}
+
+.Toastify__toast--error {
+  background: #f44336; 
+}
+.Toastify__toast {
+  color: #fff;
+}

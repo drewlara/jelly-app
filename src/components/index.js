@@ -6,6 +6,7 @@ import Snackbar from './Snackbar';
 import TextField from './Textfield';
 import Toolbar from './Toolbar';
 import Typography from './Typography';
+import Toast from './Toast';
 
 export {
   AppBar,
@@ -15,5 +16,6 @@ export {
   Snackbar,
   TextField,
   Toolbar,
-  Typography
+  Typography,
+  Toast
 };

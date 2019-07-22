@@ -1,3 +1,6 @@
+import { toast } from 'react-toastify';
+import codeToMsg from 'normalizers/error';
+
 const initialState = {
   error: null,
   isLoading: false
@@ -42,6 +45,7 @@ export const signIn = (credentials) => (dispatch, getState, { getFirebase }) => 
       type: 'AUTH_ERROR',
       error
     });
+    toast.error(codeToMsg(error));
   });
 };
 
@@ -51,6 +55,7 @@ export const signOut = () => (dispatch, getState, { getFirebase }) => {
     dispatch({
       type: 'CLEAR_AUTH'
     })
+    toast.success('Logged out succesfully.');
   });
 };
 
@@ -69,8 +74,10 @@ export const signUp = (newUser) => (dispatch, gesState, { getFirebase, getFirest
     })
   }).then(() => {
     dispatch({ type: 'AUTH_SUCCESS' });
+    toast.success('Account created.');
   }).catch((error) => {
     dispatch({ type: 'AUTH_ERROR', error });
+    toast.error(codeToMsg(error));
   })
 }
 
